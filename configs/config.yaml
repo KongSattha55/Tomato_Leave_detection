@@ -1,0 +1,32 @@
+# ============================================================
+# Tomato Leaf Disease Detection — Training Configuration
+# ============================================================
+
+data:
+  train_dir: Dataset/tomato/train
+  test_dir:  Dataset/tomato/test
+  val_split: 0.2           # fraction of train used for validation
+  image_size: 224
+  batch_size: 32
+  num_workers: 4
+  seed: 42
+
+training:
+  epochs: 30
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  label_smoothing: 0.1     # 0 to disable
+  patience: 7              # EarlyStopping patience
+  grad_clip: 1.0
+
+model:
+  # Choices: custom_cnn | mobilenetv2 | efficientnetb0 | densenet121 | resnet50
+  name: efficientnetb0
+  num_classes: 10
+  pretrained: true
+  dropout: 0.3
+
+paths:
+  save_dir: saved_models
+  log_file: logs/train.log
+  figures_dir: figures
